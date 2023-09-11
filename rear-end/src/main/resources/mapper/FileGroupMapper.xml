@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zly.common.mapper.FileGroupMapper">
+
+    <select id="getList" resultType="com.zly.common.vo.FileGroupVo">
+        select
+            a.*,b.user_name as createByName
+        from file_group a
+        left join user b on a.oid = b.oid
+        where b.id = #{dto.selecter}
+        <if test="dto.fileGroupName != null and dto.fileGroupName != ''">
+            and a.file_group_name like concat('%',#{dto.fileGroupName},'%')
+        </if>
+    </select>
+</mapper>
